@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment {
-    private CreditCardDto creditCardDto;
+    private CreditCardDto creditCard;
     private String customerId;
     private String orderId;
 }

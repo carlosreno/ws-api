@@ -1,3 +1,4 @@
 # Configuração do cliente Feign
 ws-ras:
+  name: ws-ras
   url: https://ws-raspay.herokuapp.com/ws-raspay/v1
