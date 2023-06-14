@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ws.api.wsapi.dto.consumers.CostumerDto;
 import ws.api.wsapi.dto.consumers.OrderDto;
-import ws.api.wsapi.dto.consumers.Payment;
+import ws.api.wsapi.dto.consumers.PaymentDto;
 import ws.api.wsapi.integration.configuration.WsRaspayIntegrationConfig;
 
 @FeignClient(name = "${ws-ras.name}", url = "${ws-ras.url}",
@@ -17,6 +17,6 @@ public interface RaspayFeignClient {
     @PostMapping("/order")
     OrderDto createOrder (@RequestBody OrderDto dto);
     @PostMapping("/payment/credit-card/")
-    Boolean processPayment(@RequestBody Payment payment);
+    Boolean processPayment(@RequestBody PaymentDto payment);
 
 }

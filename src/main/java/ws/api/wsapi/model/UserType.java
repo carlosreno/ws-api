@@ -1,5 +1,6 @@
 package ws.api.wsapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_type")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserType implements Serializable {
     @Id
     @GeneratedValue(generator = "seq_user_type_id",strategy = GenerationType.AUTO)

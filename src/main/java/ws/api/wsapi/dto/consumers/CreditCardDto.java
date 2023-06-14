@@ -1,6 +1,7 @@
 package ws.api.wsapi.dto.consumers;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.web.JsonPath;
@@ -8,11 +9,12 @@ import org.springframework.data.web.JsonPath;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CreditCardDto {
     private Long cvv;
     private String documentNumber;
     private Long installments;
-    private Long month;
+    private Long month  ;
     private String number;
     private Long year;
 }

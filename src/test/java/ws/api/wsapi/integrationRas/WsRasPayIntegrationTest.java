@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ws.api.wsapi.dto.consumers.CostumerDto;
 import ws.api.wsapi.dto.consumers.CreditCardDto;
 import ws.api.wsapi.dto.consumers.OrderDto;
-import ws.api.wsapi.dto.consumers.Payment;
+import ws.api.wsapi.dto.consumers.PaymentDto;
 import ws.api.wsapi.integration.RaspayFeignClient;
 import ws.api.wsapi.integration.WsRaspayIntegration;
 import ws.api.wsapi.integration.impl.WsRaspayIntegrationImpl;
@@ -45,9 +45,10 @@ public class WsRasPayIntegrationTest {
     }
     @Test
     void processPaymentWhenDtoOK(){
-        var creditCardDto = new CreditCardDto(123L,"123456789",5L,6L,"1234123412341234",2031L);
-        Payment paymentDto = new Payment(creditCardDto,"648730ad223e794f1fa0d9db","6487609a223e794f1fa0d9df");
-        var dtoRas = raspayFeignClient.processPayment(paymentDto);
-        System.out.println(dtoRas);
+            CreditCardDto creditCardDto = new CreditCardDto(123L,"1234567890",12L,2L,"1234123412341235",2030L);
+            PaymentDto paymentDto = new PaymentDto(creditCardDto,"648730ad223e794f1fa0d9db","6489a45f9c08077cfa7ba0eb");
+            System.out.println(paymentDto);
+            var boo = raspayFeignClient.processPayment(paymentDto);
+        System.out.println(boo);
     }
 }

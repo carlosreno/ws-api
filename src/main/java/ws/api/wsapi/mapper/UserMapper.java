@@ -17,7 +17,7 @@ public class UserMapper {
                 .userType(user.getUserType().getId())
                 .dtSubscription(user.getDtSubscription())
                 .dtExpiration(user.getDtExpiration())
-                .subscriptionsTypeId(user.getSubscriptionsTypeId().getId())
+                .subscriptionsTypeId(user.getSubscriptionsType().getId())
                 .build();
     }
     public static User fromDtoToEntity(UserDto dto, UserType userType, SubscriptionType subscriptionType){
@@ -29,7 +29,7 @@ public class UserMapper {
                 .userType(userType)
                 .dtSubscription(dto.getDtSubscription())
                 .dtExpiration(dto.getDtExpiration())
-                .subscriptionsTypeId(subscriptionType)
+                .subscriptionsType(subscriptionType)
                 .build();
     }
 }

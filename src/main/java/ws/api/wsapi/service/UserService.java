@@ -6,7 +6,7 @@ import ws.api.wsapi.model.User;
 import java.util.List;
 
 public interface UserService {
-    List<UserDto> getAll();
+    List<User> getAll();
     UserDto getUserById();
     User createUser(UserDto dto);
     User updateUser(Long id,UserDto dto);

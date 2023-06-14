@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ws.api.wsapi.dto.error.ErrorDTO;
 import ws.api.wsapi.exception.BadRequestException;
+import ws.api.wsapi.exception.BusinessException;
 import ws.api.wsapi.exception.NotFoundException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -24,6 +25,15 @@ public class ResourceHandler {
                         .httpStatus(httpStatus)
                         .message(Collections.singletonList(n.getMessage()))
                         .statusCode(httpStatus.value())
+                .build());
+    }
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorDTO> businessException(BusinessException n){
+        HttpStatus httpStatus = HttpStatus.CONFLICT;
+        return ResponseEntity.status(httpStatus).body(ErrorDTO.builder()
+                .httpStatus(httpStatus)
+                .message(Collections.singletonList(n.getMessage()))
+                .statusCode(httpStatus.value())
                 .build());
     }
     @ExceptionHandler(BadRequestException.class)

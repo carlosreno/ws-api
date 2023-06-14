@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableFeignClients
-@ComponentScan(basePackages = "ws.api.wsapi.integration")
 @SpringBootApplication
 public class WsApiApplication {
 

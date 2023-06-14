@@ -45,5 +45,5 @@ public class User {
     private UserType userType;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subscriptions_type_id")
-    private SubscriptionType subscriptionsTypeId;
+    private SubscriptionType subscriptionsType;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import ws.api.wsapi.dto.consumers.CostumerDto;
 import ws.api.wsapi.dto.consumers.OrderDto;
-import ws.api.wsapi.dto.consumers.Payment;
+import ws.api.wsapi.dto.consumers.PaymentDto;
 import ws.api.wsapi.integration.WsRaspayIntegration;
 
 @Component
@@ -31,7 +31,9 @@ public class WsRaspayIntegrationImpl implements WsRaspayIntegration{
     public OrderDto createOrder(OrderDto dto) {
         return null;
     }
-    public Boolean processPayment(Payment payment) {
+
+
+    public Boolean processPayment(PaymentDto payment) {
         return null;
     }
 }

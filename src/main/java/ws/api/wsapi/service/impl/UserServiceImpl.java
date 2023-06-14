@@ -21,11 +21,11 @@ public class UserServiceImpl implements UserService {
         this.userTypeRepository = userTypeRepository;
     }
     @Override
-    public List<UserDto> getAll() {
+    public List<User> getAll() {
 //        List<UserDto> dto = userRepository.findAll().stream()
 //                .map()
 //        return userRepository.findAll();
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
