@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class UserPaymentInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "seq_user_payment_info_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_payment_info_id")
     private Long id;
     private String cardNumber;

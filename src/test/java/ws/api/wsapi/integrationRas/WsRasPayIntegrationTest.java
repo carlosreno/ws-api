@@ -7,6 +7,7 @@ import ws.api.wsapi.dto.consumers.CostumerDto;
 import ws.api.wsapi.dto.consumers.CreditCardDto;
 import ws.api.wsapi.dto.consumers.OrderDto;
 import ws.api.wsapi.dto.consumers.PaymentDto;
+import ws.api.wsapi.integration.MailIntegration;
 import ws.api.wsapi.integration.RaspayFeignClient;
 import ws.api.wsapi.integration.WsRaspayIntegration;
 import ws.api.wsapi.integration.impl.WsRaspayIntegrationImpl;
@@ -17,6 +18,8 @@ import java.math.BigDecimal;
 public class WsRasPayIntegrationTest {
     @Autowired
     private WsRaspayIntegration wsRaspayIntegration;
+    @Autowired
+    private MailIntegration mailIntegration;
     @Autowired
     private RaspayFeignClient raspayFeignClient;
 //    @Test
@@ -50,5 +53,9 @@ public class WsRasPayIntegrationTest {
             System.out.println(paymentDto);
             var boo = raspayFeignClient.processPayment(paymentDto);
         System.out.println(boo);
+    }
+    @Test
+    void sendMail(){
+        mailIntegration.send("carlosdavi090787@gmail.com","teste service mail","acesso liberado");
     }
 }

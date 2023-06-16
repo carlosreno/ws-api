@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
 
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user_type")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class UserType implements Serializable {
+public class UserType implements GrantedAuthority {
     @Id
     @GeneratedValue(generator = "seq_user_type_id",strategy = GenerationType.AUTO)
     @Column(name = "user_type_id")
@@ -22,4 +23,8 @@ public class UserType implements Serializable {
     private String name;
     private String description;
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }
