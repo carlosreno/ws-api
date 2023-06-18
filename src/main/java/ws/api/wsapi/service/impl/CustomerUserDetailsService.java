@@ -9,7 +9,7 @@ import ws.api.wsapi.exception.NotFoundException;
 import ws.api.wsapi.repositories.UserDetailsRepository;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class CustomerUserDetailsService  implements UserDetailsService {
 
     @Autowired
     private UserDetailsRepository userDetailsRepository;

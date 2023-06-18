@@ -6,5 +6,5 @@ public interface TokenService {
     String getToken(Authentication auth);
     Boolean isValid(String token);
 
-    Long getUerId(String token);
+    Long getUserId(String token);
 }

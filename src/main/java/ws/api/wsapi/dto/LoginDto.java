@@ -5,11 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class LoginDto {
     @NotBlank
-    private String username;
+    private String userName;
     @NotBlank
-    private String password;
+    private String passWord;
+
 }

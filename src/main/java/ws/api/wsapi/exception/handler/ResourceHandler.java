@@ -3,6 +3,7 @@ package ws.api.wsapi.exception.handler;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -79,4 +80,15 @@ public class ResourceHandler {
                 .statusCode(httpStatus.value())
                 .build());
     }
+    @ExceptionHandler(InternalAuthenticationServiceException.class)
+    public ResponseEntity<ErrorDTO> handleMethodArgumentNotValid(InternalAuthenticationServiceException ex) {
+        // Lógica de tratamento da exceção
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(httpStatus).body(ErrorDTO.builder()
+                .message(Collections.singletonList(ex.getMessage()))
+                .httpStatus(httpStatus)
+                .statusCode(httpStatus.value())
+                .build());
+    }
+
 }

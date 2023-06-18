@@ -1,31 +1,33 @@
 package ws.api.wsapi.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ws.api.wsapi.dto.JWTDto;
 import ws.api.wsapi.dto.LoginDto;
-import ws.api.wsapi.service.TokenService;
+import ws.api.wsapi.service.AutenticationService;
 
-@RequestMapping("/auth")
 @RestController
+@RequestMapping("/auth")
 public class AuthenticationController {
 
-    private AuthenticationManager authenticationManager;
-    private TokenService tokenService;
-    @PostMapping
-    public ResponseEntity<String> auth(@RequestBody @Valid LoginDto loginDto){
-        UsernamePasswordAuthenticationToken authenticationToken
-                = new UsernamePasswordAuthenticationToken(loginDto.getUsername(),loginDto.getPassword());
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        String token = tokenService.getToken(authentication);
-        return ResponseEntity.ok().body(token);
+    private final AutenticationService autenticationService;
+    public AuthenticationController(AutenticationService autenticationService) {
+
+        this.autenticationService = autenticationService;
     }
+    @GetMapping("/teste")
+    public ResponseEntity<JWTDto> teste(@Valid @RequestBody LoginDto dto){
+        return ResponseEntity.ok().body(autenticationService.auth(dto));
+    }
+    @PostMapping("/login")
+    public ResponseEntity<JWTDto> teste2(@Valid @RequestBody LoginDto dto){
+        return ResponseEntity.ok().body(autenticationService.auth(dto));
+    }
+//    @PostMapping("/login")
+//    public ResponseEntity<JWTDto> createAuthenticationToken(@Valid @RequestBody LoginDto loginDto){
+//        System.out.println("ola");
+//        return ResponseEntity.ok().body(autenticationService.auth(loginDto));
+//    }
+
 }

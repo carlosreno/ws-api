@@ -1,8 +1,15 @@
 package ws.api.wsapi.integrationRas;
 
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ws.api.wsapi.dto.JWTDto;
+import ws.api.wsapi.dto.LoginDto;
 import ws.api.wsapi.dto.consumers.CostumerDto;
 import ws.api.wsapi.dto.consumers.CreditCardDto;
 import ws.api.wsapi.dto.consumers.OrderDto;
@@ -11,6 +18,8 @@ import ws.api.wsapi.integration.MailIntegration;
 import ws.api.wsapi.integration.RaspayFeignClient;
 import ws.api.wsapi.integration.WsRaspayIntegration;
 import ws.api.wsapi.integration.impl.WsRaspayIntegrationImpl;
+import ws.api.wsapi.service.AutenticationService;
+import ws.api.wsapi.service.TokenService;
 
 import java.math.BigDecimal;
 
@@ -22,6 +31,12 @@ public class WsRasPayIntegrationTest {
     private MailIntegration mailIntegration;
     @Autowired
     private RaspayFeignClient raspayFeignClient;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private AutenticationService autenticationService;
 //    @Test
 //    void createCustomerWhenDtoOK(){
 //        var dto = new CostumerDto(null,"08142678314","carlosdavi090787@gmail.com","Carlos","Ferreira");
@@ -58,4 +73,19 @@ public class WsRasPayIntegrationTest {
     void sendMail(){
         mailIntegration.send("carlosdavi090787@gmail.com","teste service mail","acesso liberado");
     }
+
+    @Test
+    void auth(){
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken("carlos","123456");
+        Authentication userAuth= authenticationManager.authenticate(authenticationToken);
+        String jwtDto = tokenService.getToken(userAuth);
+        System.out.println(jwtDto);
+    }
+    @Test
+    void authService(){
+        JWTDto token = autenticationService.auth(new LoginDto("carlos","123456"));
+        System.out.println(token);
+    }
+
 }
