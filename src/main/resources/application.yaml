@@ -9,6 +9,15 @@ spring:
     url: jdbc:mysql://localhost:3306/RASPLUS
     username: rasmoo
     password: senha123
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        #format_sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
   #Swagger
   springdoc:
     swagger-ui:
@@ -26,6 +35,7 @@ spring:
           starttls:
             enable: true
             required: true
+
 # Configuração do cliente Feign
 ws-ras:
   name: ws-ras

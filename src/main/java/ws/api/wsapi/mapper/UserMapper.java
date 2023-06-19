@@ -2,9 +2,9 @@ package ws.api.wsapi.mapper;
 
 import lombok.experimental.UtilityClass;
 import ws.api.wsapi.dto.model.UserDto;
-import ws.api.wsapi.model.SubscriptionType;
-import ws.api.wsapi.model.User;
-import ws.api.wsapi.model.UserType;
+import ws.api.wsapi.model.jpa.SubscriptionType;
+import ws.api.wsapi.model.jpa.User;
+import ws.api.wsapi.model.jpa.UserType;
 
 @UtilityClass
 public class UserMapper {

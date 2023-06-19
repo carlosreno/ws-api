@@ -1,4 +1,4 @@
-package ws.api.wsapi.model;
+package ws.api.wsapi.model.jpa;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

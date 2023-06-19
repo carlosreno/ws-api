@@ -1,7 +1,7 @@
 package ws.api.wsapi.mapper.wsraspay;
 
 import ws.api.wsapi.dto.consumers.CostumerDto;
-import ws.api.wsapi.model.User;
+import ws.api.wsapi.model.jpa.User;
 
 public class CustomerMapper {
     public static CostumerDto build(User user){

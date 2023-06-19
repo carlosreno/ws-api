@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.api.wsapi.dto.model.UserDto;
-import ws.api.wsapi.model.User;
+import ws.api.wsapi.model.jpa.User;
 import ws.api.wsapi.service.UserService;
 
 import java.util.List;
@@ -28,4 +28,5 @@ public class UserController {
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAll());
     }
+
 }

@@ -29,6 +29,7 @@ public class WebSecurityConfig   {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( authorize -> authorize
+                        .requestMatchers(HttpMethod.GET,"/sub-tp/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

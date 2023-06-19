@@ -7,11 +7,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import ws.api.wsapi.model.UserCredentials;
+import ws.api.wsapi.model.jpa.UserCredentials;
 import ws.api.wsapi.service.TokenService;
 
 import java.time.*;
-import java.util.Calendar;
 import java.util.Date;
 @Service
 public class TokenServiceImpl implements TokenService {

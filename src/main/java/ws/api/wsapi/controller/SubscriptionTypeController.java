@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.api.wsapi.dto.model.SubscriptionTypeDTO;
-import ws.api.wsapi.model.SubscriptionType;
+import ws.api.wsapi.model.jpa.SubscriptionType;
 import ws.api.wsapi.service.SubscriptionTypeService;
 
 import java.util.List;
@@ -18,7 +18,6 @@ public class SubscriptionTypeController {
 
     @Autowired
     private SubscriptionTypeService subscriptionTypeService;
-
     @GetMapping("/all-sub")
     public ResponseEntity<List<SubscriptionType>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.finAll());

@@ -2,8 +2,8 @@ package ws.api.wsapi.mapper;
 
 import lombok.experimental.UtilityClass;
 import ws.api.wsapi.dto.model.UserPaymentInfoDto;
-import ws.api.wsapi.model.User;
-import ws.api.wsapi.model.UserPaymentInfo;
+import ws.api.wsapi.model.jpa.User;
+import ws.api.wsapi.model.jpa.UserPaymentInfo;
 
 @UtilityClass
 public class UserPaymentInfoMapper {

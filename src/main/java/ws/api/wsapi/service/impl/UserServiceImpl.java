@@ -1,25 +1,27 @@
 package ws.api.wsapi.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ws.api.wsapi.dto.model.UserDto;
 import ws.api.wsapi.exception.BadRequestException;
 import ws.api.wsapi.mapper.UserMapper;
-import ws.api.wsapi.model.User;
-import ws.api.wsapi.repositories.UserRepository;
-import ws.api.wsapi.repositories.UserTypeRepository;
+import ws.api.wsapi.model.jpa.User;
+import ws.api.wsapi.model.redis.UserRecoveryCode;
+import ws.api.wsapi.repositories.jpa.UserRepository;
+import ws.api.wsapi.repositories.jpa.UserTypeRepository;
+import ws.api.wsapi.repositories.redis.UserRecoveryCodeRepository;
 import ws.api.wsapi.service.UserService;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
-    UserServiceImpl(UserRepository userRepository, UserTypeRepository userTypeRepository){
-        this.userRepository = userRepository;
-        this.userTypeRepository = userTypeRepository;
-    }
+    private final UserRecoveryCodeRepository recoveryCodeRepository;
+
     @Override
     public List<User> getAll() {
 //        List<UserDto> dto = userRepository.findAll().stream()
@@ -54,4 +56,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
 
     }
+
+
 }

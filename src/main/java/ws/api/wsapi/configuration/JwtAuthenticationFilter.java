@@ -5,14 +5,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ws.api.wsapi.exception.NotFoundException;
-import ws.api.wsapi.model.UserCredentials;
-import ws.api.wsapi.repositories.UserDetailsRepository;
+import ws.api.wsapi.model.jpa.UserCredentials;
+import ws.api.wsapi.repositories.jpa.UserDetailsRepository;
 import ws.api.wsapi.service.TokenService;
 
 import java.io.IOException;
@@ -34,9 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
         String token = getBearerToken(request);
-        System.out.println(token);
         if (Boolean.TRUE.equals(tokenService.isValid(token))) {
-            System.out.println("é valido rapax");
             authByToken(token);
         }
         filterChain.doFilter(request, response);

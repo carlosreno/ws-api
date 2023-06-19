@@ -1,7 +1,7 @@
 package ws.api.wsapi.service;
 
 import ws.api.wsapi.dto.model.SubscriptionTypeDTO;
-import ws.api.wsapi.model.SubscriptionType;
+import ws.api.wsapi.model.jpa.SubscriptionType;
 
 import java.util.List;
 

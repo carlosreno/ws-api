@@ -2,7 +2,7 @@ package ws.api.wsapi.mapper;
 
 import lombok.experimental.UtilityClass;
 import ws.api.wsapi.dto.model.SubscriptionTypeDTO;
-import ws.api.wsapi.model.SubscriptionType;
+import ws.api.wsapi.model.jpa.SubscriptionType;
 
 @UtilityClass
 public class SubscriptionTypeMapper {

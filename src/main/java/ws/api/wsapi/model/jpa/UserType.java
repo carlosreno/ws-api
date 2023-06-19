@@ -1,4 +1,4 @@
-package ws.api.wsapi.model;
+package ws.api.wsapi.model.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
