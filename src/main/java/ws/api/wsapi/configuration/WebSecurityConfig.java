@@ -31,6 +31,7 @@ public class WebSecurityConfig   {
                 .authorizeHttpRequests( authorize -> authorize
                         .requestMatchers(HttpMethod.GET,"/sub-tp/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/recovery-code/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class)
