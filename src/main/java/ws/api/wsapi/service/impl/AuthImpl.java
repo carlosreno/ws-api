@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ws.api.wsapi.dto.JWTDto;
 import ws.api.wsapi.dto.LoginDto;
+import ws.api.wsapi.exception.BusinessException;
 import ws.api.wsapi.service.AutenticationService;
 import ws.api.wsapi.service.TokenService;
 
@@ -23,18 +24,14 @@ public class AuthImpl implements AutenticationService {
 
     @Override
     public JWTDto auth(LoginDto dto) {
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(dto.getUserName(),dto.getPassWord());
         Authentication userAuth= authenticationManager.authenticate(authenticationToken);
-        try {
-            String token = tokenService.getToken(userAuth);
-            return JWTDto.builder()
-                    .type("Bearer")
-                    .token(token)
-                    .build();
-        } catch (Exception e) {
-            throw new BadCredentialsException("user ou senha invalida");
-        }
-
+        String token = tokenService.getToken(userAuth);
+        return JWTDto.builder()
+                .type("Bearer")
+                .token(token)
+                .build();
     }
 }

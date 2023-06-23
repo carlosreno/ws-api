@@ -23,7 +23,7 @@ import ws.api.wsapi.service.impl.CustomerUserDetailsService;
 public class WebSecurityConfig   {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter ;
-    private final CustomerUserDetailsService customerUserDetailsService ;
+    private CustomerUserDetailsService customerUserDetailsService;
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http

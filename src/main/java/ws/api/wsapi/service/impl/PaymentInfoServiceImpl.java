@@ -2,7 +2,6 @@ package ws.api.wsapi.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ws.api.wsapi.dto.PaymentProcessDto;
 import ws.api.wsapi.dto.consumers.CostumerDto;
@@ -23,6 +22,7 @@ import ws.api.wsapi.repositories.jpa.UserDetailsRepository;
 import ws.api.wsapi.repositories.jpa.UserPaymentInfoRepository;
 import ws.api.wsapi.repositories.jpa.UserRepository;
 import ws.api.wsapi.service.PaymentInfoService;
+import ws.api.wsapi.utils.PassWordUtils;
 
 import java.util.Objects;
 @Service
@@ -65,7 +65,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
             UserPaymentInfo paymentInfo = UserPaymentInfoMapper
                                             .fromDtoToEntity(dto.getUserPaymentInfoDto(), user);
             UserCredentials userCredentials = new UserCredentials(null,user.getEmail(),
-                    new BCryptPasswordEncoder().encode(passDefault),user.getUserType());
+                    PassWordUtils.encode(passDefault),user.getUserType());
 
             userDetailsRepository.save(userCredentials);
             paymentInfoRepository.save(paymentInfo);

@@ -1,13 +1,10 @@
 package ws.api.wsapi.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ws.api.wsapi.dto.consumers.DtoRecovery;
+import ws.api.wsapi.dto.DtoRecovery;
 import ws.api.wsapi.dto.message.MessageDTO;
 import ws.api.wsapi.exception.BusinessException;
 import ws.api.wsapi.exception.NotFoundException;
@@ -17,9 +14,8 @@ import ws.api.wsapi.model.redis.UserRecoveryCode;
 import ws.api.wsapi.repositories.jpa.UserDetailsRepository;
 import ws.api.wsapi.repositories.redis.UserRecoveryCodeRepository;
 import ws.api.wsapi.service.UserDetailService;
-
+import ws.api.wsapi.utils.PassWordUtils;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -28,14 +24,6 @@ public class CustomerUserDetailsService  implements UserDetailService {
     private final UserDetailsRepository userDetailsRepository;
     private final UserRecoveryCodeRepository recoveryCodeRepository;
     private final MailIntegration mailIntegration;
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var optUserDetail = userDetailsRepository.findByUserName(username);
-        if (optUserDetail.isPresent()){
-            return optUserDetail.get();
-        }
-        throw new NotFoundException("usuário com o username informado não existe");
-    }
     @Override
     public MessageDTO sendRecoveryCode(String email) {
         UserRecoveryCode userRecoveryCode;
@@ -108,12 +96,30 @@ public class CustomerUserDetailsService  implements UserDetailService {
     }
 
     @Override
-    public void updatePasswordByRecoveryCode(DtoRecovery dtoRecovery) {
-        if (recoveryIsValid(dtoRecovery.getEmail(), dtoRecovery.getRecoveryCode())){
+    public MessageDTO updatePasswordByRecoveryCode(DtoRecovery dtoRecovery) {
+        if (recoveryIsValid(dtoRecovery.getRecoveryCode(),dtoRecovery.getEmail())) {
             var optUSerDetail = userDetailsRepository.findByUserName(dtoRecovery.getEmail());
             optUSerDetail.ifPresent(userCredentials ->
-                    userCredentials.setPassword(dtoRecovery.getPassword()));
+                    userCredentials.setPassword(PassWordUtils.encode(dtoRecovery.getPassword())));
+            userDetailsRepository.save(optUSerDetail.get());
+
+        }else {
+            throw new BusinessException("codigo invalido");
         }
+        HttpStatus status = HttpStatus.OK;
+        return MessageDTO.builder()
+                .httpStatus(status)
+                .message("Atualizado com sucesso")
+                .statusCode(status.value())
+                .build();
     }
 
+    @Override
+    public UserCredentials loadUserByUsername(String username) throws UsernameNotFoundException {
+        var user = userDetailsRepository.findByUserName(username);
+        if (user.isPresent()){
+            return user.get();
+        }
+        throw new NotFoundException("usuário com o username informado não existe");
+    }
 }
