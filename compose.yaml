@@ -21,5 +21,4 @@ services:
       - redis_data_container:/data/redis
 volumes:
   mysql_data_container:
-  mongo_data_container:
   redis_data_container:
