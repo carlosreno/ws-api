@@ -55,9 +55,7 @@ public class CustomerUserDetailsService  implements UserDetailService {
         }
         try {
             recoveryCodeRepository.save(userRecoveryCode);
-            System.out.println("1");
             mailIntegration.send(email, "Codigo de recuperação:"+code+"<br>Este código expirará em 10 minutos","teste");
-            System.out.println("2");
             HttpStatus status = HttpStatus.OK;
             return MessageDTO.builder()
                     .httpStatus(status)
