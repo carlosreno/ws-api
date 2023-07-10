@@ -1,10 +1,7 @@
 package ws.api.wsapi.model.redis;
 
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
@@ -25,4 +22,9 @@ public class UserRecoveryCode {
     private String email;
     private String code;
     private LocalDateTime createDate = LocalDateTime.now();
+
+    public boolean isCodeValid(){
+        var limitTime = LocalDateTime.now().minusMinutes(1);
+        return createDate.isAfter(limitTime);
+    }
 }
